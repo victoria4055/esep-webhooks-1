@@ -20,8 +20,8 @@ public class Function
     {
         context.Logger.LogInformation($"FunctionHandler received: {input}");
     
-        dynamic json = JsonConvert.DeserializeObject<dynamic>(input.ToString());
-        dynamic body = JsonConvert.DeserializeObject<dynamic>(json.body.ToString());
+        dynamic json = JsonConvert.DeserializeObject<dynamic>(input.ToString());        
+        string payload = $"{{'text':'Issue Created: {json.issue.html_url}'}}";
         
         context.Logger.LogInformation($"Body parsed: {body}");
         
