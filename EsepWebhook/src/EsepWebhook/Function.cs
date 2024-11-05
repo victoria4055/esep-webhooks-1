@@ -19,13 +19,9 @@ public class Function
     public string FunctionHandler(object input, ILambdaContext context)
     {
         context.Logger.LogInformation($"FunctionHandler received: {input}");
-    
-        dynamic json = JsonConvert.DeserializeObject<dynamic>(input.ToString());        
+
+        dynamic json = JsonConvert.DeserializeObject<dynamic>(input.ToString());
         string payload = $"{{'text':'Issue Created: {json.issue.html_url}'}}";
-        
-        context.Logger.LogInformation($"Body parsed: {body}");
-        
-        string payload = $"{{'text':'Issue Created: {body.issue.html_url}'}}";
         
         var client = new HttpClient();
         var webRequest = new HttpRequestMessage(HttpMethod.Post, Environment.GetEnvironmentVariable("SLACK_URL"))
