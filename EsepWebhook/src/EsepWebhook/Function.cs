@@ -21,8 +21,18 @@ public class Function
         context.Logger.LogInformation($"FunctionHandler received: {input}");
 
         dynamic json = JsonConvert.DeserializeObject<dynamic>(input.ToString());
-        string payload = $"{{'text':'Issue Created: {json.issue.html_url}'}}";
+
+        // Testing from postman, you can use this code to test the function
+        /*
+        context.Logger.LogInformation($"Body: {json.body}");
+        dynamic body = JsonConvert.DeserializeObject<dynamic>(json.body.ToString());
+        context.Logger.LogInformation($"Issue: {body.issue}");
+        context.Logger.LogInformation($"Html: {body.issue.html_url}");
+        string payload = $"{{'text':'Issue Created: {body.issue.html_url}'}}";
+        */
         
+        string payload = $"{{'text':'Issue Created: {json.issue.html_url}'}}";
+
         var client = new HttpClient();
         var webRequest = new HttpRequestMessage(HttpMethod.Post, Environment.GetEnvironmentVariable("SLACK_URL"))
         {
